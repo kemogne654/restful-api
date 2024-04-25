@@ -1,13 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
+const bookRouter = require("./api/books/book.router");
+app.use(express.json());
+app.use("/api/books", bookRouter);
 
-app.get("/api", (req, res) => {
-  res.json({
-    success: 1,
-    message: "server is up and run successfully",
-  });
-});
-
-app.listen(3000, () => {
-  console.log("server up and running");
+app.listen(process.env.APP_PORT, () => {
+  console.log("server up and running on port:", process.env.APP_PORT);
 });
